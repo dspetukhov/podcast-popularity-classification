@@ -8,7 +8,7 @@ cache = yaml.safe_load(open('data.yaml', 'r'))
 
 episodes = [
     episode for episode in cache
-    if cache[episode]['year'] == 2022 #and cache[episode]['dow'] not in ('Friday', 'Wednesday')
+    if cache[episode]['year'] in [2022, 2023]
 ]
 
 for episode in episodes:
@@ -23,7 +23,7 @@ for episode in episodes:
                     'youtube-dl',
                     '-x',
                     '--audio-format', 'wav',
-                    '--audio-quality', '0',
+                    '--audio-quality', '5',
                     '-o',
                     'data/raw/{}.%(ext)s'.format(episode),
                     '{}'.format(cache[episode]['link'])

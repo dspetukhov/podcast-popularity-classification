@@ -80,13 +80,13 @@ def job(episodes, cache_file):
     """
     Get and save information about every podcast episode in the list.
     """
-    cache = yaml.safe_load(cache_file) if os.path.exists(cache_file) else {}
+    cache = yaml.safe_load(open(cache_file)) if os.path.exists(cache_file) else {}
     #
     while episodes:
         print('.', end='')
         #
         episode = random.choice(episodes)
-        episodes.pop(episodes.index(episode))
+        episodes.remove(episode)
         #
         data = get_data(episode)
         if not data:
