@@ -4,29 +4,24 @@ import subprocess
 import random
 from time import sleep
 
-cache = yaml.safe_load(open('data.yaml', 'r'))
 
-episodes = [
-    episode for episode in cache
-    if cache[episode]['year'] in [2022, 2023]
-]
-
-for episode in episodes:
+def job(episode):
+    """Download podcast episode as mp3 file using youtube-dl."""
     print('-{}'.format(episode), end='')
-    if os.path.exists('data/raw/{}.wav'.format(episode)):
-        continue
+    if os.path.exists('data/raw/{}.mp3'.format(episode)):
+        return
     #
     for _ in range(13):
         try:
-            output = subprocess.check_output(
+            subprocess.call(
                 [
                     'youtube-dl',
                     '-x',
-                    '--audio-format', 'wav',
+                    '--audio-format', 'mp3',
                     '--audio-quality', '5',
                     '-o',
                     'data/raw/{}.%(ext)s'.format(episode),
-                    '{}'.format(cache[episode]['link'])
+                    cache[episode]['link']
                 ]
             )
             break
@@ -34,3 +29,10 @@ for episode in episodes:
             sleep(random.randint(0, 300))
     #
     sleep(random.randint(0, 300))
+
+
+if __name__ == '__main__':
+    cache = yaml.safe_load(open('data.yaml', 'r'))
+    for episode in cache:
+        if cache[episode]['year'] in [2022, 2023]:
+            job(episode)
