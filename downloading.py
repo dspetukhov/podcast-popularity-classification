@@ -24,11 +24,11 @@ def job(episode):
                     cache[episode]['link']
                 ]
             )
-            break
+            return
         except Exception:
-            sleep(random.randint(0, 300))
+            sleep(random.randint(3, 300))
     #
-    sleep(random.randint(0, 300))
+    sleep(random.randint(3, 300))
 
 
 if __name__ == '__main__':

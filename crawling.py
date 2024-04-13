@@ -73,7 +73,7 @@ def get_data(episode):
             return _get_data(episode)
         except Exception:
             print('!', end='')
-            sleep(random.randint(0, 60))
+            sleep(random.randint(6, 60))
 
 
 def job(episodes, cache_file):
@@ -93,7 +93,7 @@ def job(episodes, cache_file):
             continue
         cache.update(data)
         #
-        sleep(random.randint(0, 60))
+        sleep(random.randint(6, 60))
 
     yaml.safe_dump(
         cache,
