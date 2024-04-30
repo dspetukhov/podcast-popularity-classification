@@ -13,7 +13,7 @@ def get_spectrogram(waveform, sample_rate, spectrogram_type='spectrogram'):
         spectrogram = _lfcc(sample_rate)
     a2db = T.AmplitudeToDB(top_db=80)
     return a2db(
-        spectrogram(waveform.mean(dim=0))
+        spectrogram(waveform)
     )
 
 
@@ -27,7 +27,8 @@ def _spectrogram(sample_rate):
 def _melspectrogram(sample_rate):
     return T.MelSpectrogram(
         sample_rate=sample_rate,
-        n_fft=sample_rate, hop_length=sample_rate // 2,
+        n_fft=sample_rate,
+        hop_length=sample_rate // 2,
         n_mels=128
     )
 
