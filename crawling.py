@@ -16,7 +16,7 @@ def _get_data(episode):
     - title
     - duration
     - YouTube link for audio downloading
-    - number of listenings at SoundCloud
+    - number of listenings on SoundCloud
     """
     driver = webdriver.Chrome(options=launch_options)
     driver.get('https://www.superdatascience.com/{}'.format(episode))
