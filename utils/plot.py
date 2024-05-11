@@ -63,12 +63,14 @@ def get_figure(stats):
     return figure
 
 
-def update_figure(figure, stats):
+def update_figure(figure, stats, filename):
     for idx, key in enumerate(stats):
         if idx:
             scatter = figure.data[idx-1]
             scatter.x = stats['epoch']
             scatter.y = stats[key]
+    figure.write_image(f'artifacts/{filename}.png')  
+    return
 
 
 def _get_marker_dict(training=True):
