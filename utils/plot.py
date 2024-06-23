@@ -1,5 +1,7 @@
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
+from plotly import io
+io.renderers.default = 'plotly_mimetype+notebook'
 
 
 def get_figure(stats):
@@ -53,7 +55,7 @@ def get_figure(stats):
         row=1, col=2
     )
     #
-    figure.update_layout(plot_bgcolor = 'white', width=1000, height=500, font_family='Arial', font_size=12)
+    figure.update_layout(plot_bgcolor = 'white', width=1100, height=500, font_family='Arial', font_size=12)
     figure.update_xaxes(title_text='Epoch')
     figure.update_yaxes(title_text='Loss', row=1, col=1)
     figure.update_yaxes(title_text='AUC ROC', row=1, col=2)
@@ -69,7 +71,8 @@ def update_figure(figure, stats, filename):
             scatter = figure.data[idx-1]
             scatter.x = stats['epoch']
             scatter.y = stats[key]
-    figure.write_image(f'artifacts/{filename}.png')  
+    figure.write_image(f'artifacts/{filename}.png')
+    # figure.write_html(f'artifacts/{filename}.html')
     return
 
 
